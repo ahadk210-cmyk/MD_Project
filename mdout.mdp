@@ -2,7 +2,7 @@
 ;	File 'mdout.mdp' was generated
 ;	By user: unknown (1000)
 ;	On host: Asus
-;	At date: Thu Aug  6 18:36:06 2026
+;	At date: Thu Aug  6 18:42:34 2026
 ;
 ;	Created by:
 ;	         :-) GROMACS - gmx grompp, 2023.3-Ubuntu_2023.3_1ubuntu3 (-:
@@ -11,7 +11,7 @@
 ;	Data prefix:  /usr
 ;	Working dir:  /mnt/d/Computational Projects/Project 2/MD_Project
 ;	Command line:
-;	  gmx grompp -f MDP/npt.mdp -c nvt.gro -t nvt.cpt -p topol.top -n index.ndx -o npt.tpr -maxwarn 2
+;	  gmx grompp -f MDP/md.mdp -c npt.gro -t npt.cpt -p topol.top -n index.ndx -o md.tpr -maxwarn 1
 
 ; VARIOUS PREPROCESSING OPTIONS
 ; Preprocessor information: use cpp syntax.
@@ -24,8 +24,8 @@ define                   =
 integrator               = md
 ; Start time and timestep in ps
 tinit                    = 0
-dt                       = 0.002
-nsteps                   = 50000
+dt                       = 0.001
+nsteps                   = 500000
 ; For exact run continuation or redoing part of a run
 init-step                = 0
 ; Part index is updated automatically on checkpointing (keeps files separate)
@@ -61,15 +61,15 @@ rtpi                     = 0.05
 
 ; OUTPUT CONTROL OPTIONS
 ; Output frequency for coords (x), velocities (v) and forces (f)
-nstxout                  = 500
+nstxout                  = 0
 nstvout                  = 0
 nstfout                  = 0
 ; Output frequency for energies to log file and energy file
-nstlog                   = 500
+nstlog                   = 5000
 nstcalcenergy            = 100
-nstenergy                = 500
+nstenergy                = 1000
 ; Output frequency and precision for .xtc file
-nstxout-compressed       = 0
+nstxout-compressed       = 1000
 compressed-x-precision   = 1000
 ; This selects the subset of atoms for the compressed
 ; trajectory file. You can select multiple groups. By
@@ -143,7 +143,7 @@ tc-grps                  = System
 tau_t                    = 0.1
 ref_t                    = 300
 ; pressure coupling     
-pcoupl                   = Berendsen
+pcoupl                   = Parrinello-Rahman
 pcoupltype               = isotropic
 nstpcouple               = -1
 ; Time constant (ps), compressibility (1/bar) and reference P (bar)
@@ -171,7 +171,7 @@ annealing-temp           =
 ; GENERATE VELOCITIES FOR STARTUP RUN
 gen_vel                  = no
 gen-temp                 = 300
-gen-seed                 = 2121662331
+gen-seed                 = -541164353
 
 ; OPTIONS FOR BONDS    
 constraints              = none
