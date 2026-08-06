@@ -1,0 +1,79 @@
+;
+;	File 'topol.top' was generated
+;	By user: unknown (1000)
+;	On host: Asus
+;	At date: Thu Aug  6 17:29:17 2026
+;
+;	This is a standalone topology file
+;
+;	Created by:
+;	         :-) GROMACS - gmx pdb2gmx, 2023.3-Ubuntu_2023.3_1ubuntu3 (-:
+;	
+;	Executable:   /usr/bin/gmx
+;	Data prefix:  /usr
+;	Working dir:  /mnt/d/Computational Projects/Project 2/MD_Project
+;	Command line:
+;	  gmx pdb2gmx -f Structures/ethanol.pdb -o Structures/ethanol_gmx.gro -p topol.top -ff gromos54a7 -water spc
+;	Force field was read from the standard GROMACS share directory.
+;
+
+; Include forcefield parameters
+#include "gromos54a7.ff/forcefield.itp"
+
+[ moleculetype ]
+; Name            nrexcl
+Other               3
+
+[ atoms ]
+;   nr       type  resnr residue  atom   cgnr     charge       mass  typeB    chargeB      massB
+; residue   1 ETHH rtp ETHH q  0.0
+     1          H      1   ETHH     EH      1      0.408      1.008
+     2         OA      1   ETHH     EO      1     -0.674    15.9994
+     3        CH2      1   ETHH    EC1      1      0.266     14.027
+     4        CH3      1   ETHH    EC2      2          0     15.035   ; qtot 0
+
+[ bonds ]
+;  ai    aj funct            c0            c1            c2            c3
+    1     2     2    gb_1
+    2     3     2    gb_18
+    3     4     2    gb_27
+
+[ pairs ]
+;  ai    aj funct            c0            c1            c2            c3
+    1     4     1 
+
+[ angles ]
+;  ai    aj    ak funct            c0            c1            c2            c3
+    1     2     3     2    ga_12
+    2     3     4     2    ga_15
+
+[ dihedrals ]
+;  ai    aj    ak    al funct            c0            c1            c2            c3            c4            c5
+    1     2     3     4     1    gd_23
+
+; Include Position restraint file
+#ifdef POSRES
+#include "posre.itp"
+#endif
+
+; Include water topology
+#include "gromos54a7.ff/spc.itp"
+
+#ifdef POSRES_WATER
+; Position restraint for each water oxygen
+[ position_restraints ]
+;  i funct       fcx        fcy        fcz
+   1    1       1000       1000       1000
+#endif
+
+; Include topology for ions
+#include "gromos54a7.ff/ions.itp"
+
+[ system ]
+; Name
+Protein in water
+
+[ molecules ]
+; Compound        #mols
+Other               1
+SOL               416

@@ -1,0 +1,6 @@
+REMARK Ethanol - GROMOS54A7 united-atom (ETHH residue)
+HETATM    1  EH  ETHH    1       1.960   1.783   0.797  1.00  0.00           H  
+HETATM    2  EO  ETHH    1       1.278   1.280   0.000  1.00  0.00           O  
+HETATM    3  EC1 ETHH    1       0.748   0.000   0.000  1.00  0.00           C  
+HETATM    4  EC2 ETHH    1      -0.748   0.000   0.000  1.00  0.00           C  
+END
