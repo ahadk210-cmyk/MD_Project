@@ -1,0 +1,16 @@
+# GROMACS backup files
+\#*\#
+*~
+
+# GROMACS crash output
+step*.pdb
+
+# Large binary files
+*.trr
+
+# Temporary files
+mdout.mdp
+
+*.lock
+*.npz
+mdout.mdp

@@ -1,7 +1,12 @@
 # Project 2 — Molecular Dynamics Simulation of Ethanol in Water
 ## GROMACS | GROMOS54A7 Force Field | 500 ps Production MD
 
-Part of a computational chemistry portfolio for MSc Chemistry applications 
+**Author:** Ahad Khan  
+**Institution:** Institute for Excellence in Higher Education (IEHE), Bhopal  
+**Software:** GROMACS 2023.3 | MDAnalysis 2.10.0 | Python 3.12 | WSL2 Ubuntu 24.04
+
+Part of a computational chemistry portfolio for MSc Chemistry applications  
+(University of Basel, University of Geneva)
 
 ---
 
@@ -78,11 +83,11 @@ Result: Converged in 77 steps, Epot = −17,898 kJ/mol
 
 ### Step 5 — NVT Equilibration (100 ps)
 Constant volume, 300 K, V-rescale thermostat, position restraints on ethanol.  
-Result: Temperature stable at 300.6 K 
+Result: Temperature stable at 300.6 K ✅
 
 ### Step 6 — NPT Equilibration (100 ps)
 Constant pressure, 1 bar, Berendsen barostat, no position restraints on ethanol.  
-Result: Density stable at 975.6 kg/m³ 
+Result: Density stable at 975.6 kg/m³ ✅
 
 ### Step 7 — Production MD (500 ps)
 Unrestrained dynamics, 500,000 steps at 1 fs timestep.  
@@ -135,27 +140,37 @@ The RDF peak at 2.7 Å is the molecular dynamics signature of the same hydrogen-
 
 ---
 
-## Files
+## Repository Structure
 
 ```
 MD_Project/
 ├── Structures/
-│   ├── ethanol.pdb           — input structure (GROMOS54A7 atom names)
-│   ├── ethanol_gmx.gro       — GROMACS coordinate file
-│   ├── ethanol_box.gro       — after box definition
-│   └── ethanol_solv.gro      — after solvation (1 ethanol + 416 water)
+│   ├── ethanol.pdb              — input structure (GROMOS54A7 atom names)
+│   ├── ethanol_gmx.gro          — GROMACS coordinate file
+│   ├── ethanol_box.gro          — after box definition
+│   └── ethanol_solv.gro         — after solvation (1 ethanol + 416 water)
+│
 ├── MDP/
-│   ├── em.mdp                — energy minimisation parameters
-│   ├── nvt.mdp               — NVT equilibration (100 ps)
-│   ├── npt.mdp               — NPT equilibration (100 ps)
-│   └── md.mdp                — production MD (500 ps, 1 fs timestep)
+│   ├── em.mdp                   — energy minimisation parameters
+│   ├── nvt.mdp                  — NVT equilibration (100 ps)
+│   ├── npt.mdp                  — NPT equilibration (100 ps)
+│   └── md.mdp                   — production MD (500 ps, 1 fs timestep)
+│
 ├── Analysis/
-│   ├── analysis.py           — MDAnalysis Python script
-│   ├── rmsd.png              — RMSD plot
-│   └── rdf.png               — RDF plot
-├── topol.top                 — full system topology
-├── posre.itp                 — position restraints (used in NVT only)
-└── index.ndx                 — GROMACS index file
+│   ├── analysis.py              — MDAnalysis Python script
+│   ├── rmsd.png                 — RMSD plot
+│   └── rdf.png                  — RDF plot
+│
+├── em.tpr / em.gro / em.edr / em.log   — energy minimisation output
+├── nvt.tpr / nvt.gro / nvt.edr / nvt.log   — NVT equilibration output
+├── npt.tpr / npt.gro / npt.edr / npt.log   — NPT equilibration output
+├── md.tpr / md.gro / md.edr / md.log   — production MD output
+├── md.xtc                       — full trajectory (500 frames)
+├── md_noPBC.xtc                 — PBC-corrected trajectory (used for analysis)
+├── topol.top                    — full system topology
+├── posre.itp                    — position restraints (used in NVT only)
+├── index.ndx                    — GROMACS index file
+└── .gitignore                   — excludes GROMACS backup and binary files
 ```
 
 ---
@@ -170,5 +185,3 @@ MD_Project/
 | numpy | 2.5.1 | Numerical analysis |
 | Python | 3.12 | Analysis scripting |
 | WSL2 Ubuntu | 24.04 | Operating environment |
-
----
